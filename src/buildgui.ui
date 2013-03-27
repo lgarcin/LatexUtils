@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>918</width>
+    <height>355</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>310</y>
+     <width>451</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QComboBox" name="combo">
+      <item>
+       <property name="text">
+        <string>TD</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Devoir</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Colle</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="view">
+      <property name="text">
+       <string>View DVI</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="build">
+      <property name="text">
+       <string>Build</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="clear">
+      <property name="text">
+       <string>Clear list</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>900</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QTreeView" name="tree"/>
+   <widget class="QTextBrowser" name="codelatex"/>
+   <widget class="QListWidget" name="exolist"/>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
