@@ -21,16 +21,18 @@ class Recap(form_class, base_class):
     def __init__(self, parent=None):
         super(Recap, self).__init__(parent)
         self.setupUi(self)
-        self.rootdir = "C:/Users/Laurent/Documents/ExercicesPrepaSupSpe"
+        self.rootdir = "E:/Documents/ExercicesPrepaSupSpe"
         self.authors = ["BE", "LG", "LK", "OM"]
         os.chdir(self.rootdir)
         listDirModel = QtGui.QStringListModel()
-        listDirModel.setStringList(os.listdir())
+        dirs=next(os.walk('.'))[1]
+        listDirModel.setStringList(dirs)
         self.listView.setModel(listDirModel)
         self.dico = {}
-        for name in os.listdir():
+        for name in dirs:
             self.dico[name] = {}
-            os.chdir(self.rootdir + "/" + name)
+            path=self.rootdir + "/" + name
+            os.chdir(path)
             try:
                 with open('dictionary.json', 'r', encoding='utf-8') as f:
                     self.dico[name] = json.load(f)

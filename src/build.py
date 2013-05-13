@@ -16,7 +16,7 @@ class Build(form_class, base_class):
     def __init__(self, parent=None):
         super(Build, self).__init__(parent)
         self.setupUi(self)
-        self.rootdir = "C:/Users/Laurent/Documents/ExercicesPrepaSupSpe"
+        self.rootdir = "E:/Documents/ExercicesPrepaSupSpe"
         self.filesystem = QtGui.QFileSystemModel()
         self.tree.setModel(self.filesystem)
         self.tree.setRootIndex(self.filesystem.setRootPath(self.rootdir))
