@@ -82,7 +82,7 @@ class Recap(form_class, base_class):
     @QtCore.pyqtSlot()
     def on_buildButton_clicked(self):
         if self.dir == None:
-            QtGui.QMessageBox.information(self, "Erreur", "Sélectionner un dossier avant de cosntruire un récapitulatif")
+            QtGui.QMessageBox.information(self, "Erreur", "Sélectionner un dossier avant de construire un récapitulatif")
         elif "" in self.dico[self.dir].values():
             QtGui.QMessageBox.information(self, "Erreur", "Définir toutes les abréviations avant de construire un récapitulatif")
         else:
@@ -93,8 +93,8 @@ class Recap(form_class, base_class):
             os.chdir(recapdir)
             recapfile = "Recap" + self.dir + ".tex"
             with open(recapfile, mode='w',encoding='utf-8') as f:
-                f.write("\\documentclass{myrecapitulatif}\n")
-                f.write("\\usepackage{mylkcz}\n")
+                f.write("\\documentclass{recapitulatif}\n")
+                f.write("\\usepackage{prepa}\n")
                 f.write("\\begin{document}\n")
                 f.write("\\pagedegarde{" + self.dico[self.dir]["Titre"] + "}{Exercices et problèmes}{version du " + time.strftime("%d %B %Y", time.localtime()) + "}\n")
                 f.write("\\Dossier{..}\n")
@@ -104,7 +104,7 @@ class Recap(form_class, base_class):
                 f.write("\\tableofcontents\n")
                 os.chdir(self.rootdir + "/" + self.dir)
                 
-                f.write("\n\\Partie{Enoncés des exercices}\n")
+                f.write("\n\\Partie{Énoncés des exercices}\n")
                 for name in self.dico[self.dir].keys():
                     if name != "Titre":
                         f.write("\n\\Chapitre{" + self.dico[self.dir][name] + "}\n")
@@ -125,7 +125,7 @@ class Recap(form_class, base_class):
                                     f.write("\\lireEnonces." + name + author + str(t) + "([" + str(first) + "-" + str(last) + "])\n")
                             
                 problems = glob.glob("PB*.tex")
-                f.write("\n\\Partie{Enoncés des problèmes}\n")
+                f.write("\n\\Partie{Énoncés des problèmes}\n")
                 for file in problems:
                     with open(file, mode='r',encoding='utf-8') as ff:
                         f.write("\\Chapitre{" + re.match('(\\\\begin\s*{\s*pb\s*}\s*{\s*)(.*)(\s*})', ff.read(None)).group(2) + "}\n")

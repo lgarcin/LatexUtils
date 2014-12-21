@@ -7,8 +7,8 @@ import fnmatch
 import os
 import shutil
 
-fromdir = 'C:/Users/Laurent/Documents/ExercicesPrepaSupSpe'
-todir = 'C:/Users/Laurent/Dropbox/ExercicesPrepaSupSpe'
+fromdir = 'E:/Documents/ExercicesPrepaSupSpe'
+todir = 'E:/Cloud/Dropbox/ExercicesPrepaSupSpe'
 os.chdir(fromdir)
 for root, dirnames, filenames in os.walk('.'):
     for filename in fnmatch.filter(filenames, '*LG*.*'):
