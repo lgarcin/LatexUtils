@@ -21,7 +21,7 @@ class Recap(form_class, base_class):
     def __init__(self, parent=None):
         super(Recap, self).__init__(parent)
         self.setupUi(self)
-        self.rootdir = "E:/Documents/ExercicesPrepaSupSpe"
+        self.rootdir = "F:/Documents/ExercicesPrepaSupSpe"
         self.authors = ["BE", "LG", "LK", "OM"]
         os.chdir(self.rootdir)
         listDirModel = QtGui.QStringListModel()
