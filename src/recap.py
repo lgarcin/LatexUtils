@@ -12,7 +12,7 @@ import json
 import time
 import subprocess
 import locale
-from PyQt4 import QtCore, QtGui, uic
+from PyQt5 import QtCore, QtWidgets, uic
 
 scriptdir = os.path.dirname(__file__)
 form_class, base_class = uic.loadUiType(scriptdir + '/recapgui.ui')
@@ -24,7 +24,7 @@ class Recap(form_class, base_class):
         self.rootdir = "F:/Documents/ExercicesPrepaSupSpe"
         self.authors = ["BE", "LG", "LK", "OM"]
         os.chdir(self.rootdir)
-        listDirModel = QtGui.QStringListModel()
+        listDirModel = QtCore.QStringListModel()
         dirs=next(os.walk('.'))[1]
         listDirModel.setStringList(dirs)
         self.listView.setModel(listDirModel)
@@ -49,15 +49,15 @@ class Recap(form_class, base_class):
         self.tableWidget.clear()
         self.tableWidget.setColumnCount(1)
         self.tableWidget.setRowCount(len(filekeys) + 1)
-        self.tableWidget.setHorizontalHeaderItem(0, QtGui.QTableWidgetItem("Valeurs extensives"))
-        self.tableWidget.setVerticalHeaderItem(0, QtGui.QTableWidgetItem("Titre"))
+        self.tableWidget.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem("Valeurs extensives"))
+        self.tableWidget.setVerticalHeaderItem(0, QtWidgets.QTableWidgetItem("Titre"))
         if "Titre" in self.dico[self.dir].keys():
-            self.tableWidget.setItem(0, 0, QtGui.QTableWidgetItem(self.dico[self.dir]["Titre"]))
+            self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem(self.dico[self.dir]["Titre"]))
         row = 1
         for name in filekeys:
-            self.tableWidget.setVerticalHeaderItem(row, QtGui.QTableWidgetItem(name))
+            self.tableWidget.setVerticalHeaderItem(row, QtWidgets.QTableWidgetItem(name))
             if name in self.dico[self.dir].keys():
-                self.tableWidget.setItem(row, 0, QtGui.QTableWidgetItem(self.dico[self.dir][name]))
+                self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(self.dico[self.dir][name]))
             else:
                 self.dico[self.dir][name] = ""
             row += 1
@@ -65,26 +65,26 @@ class Recap(form_class, base_class):
             if name != "Titre":
                 del self.dico[self.dir][name]
             
-    @QtCore.pyqtSlot(QtGui.QTableWidgetItem)
+    @QtCore.pyqtSlot(QtWidgets.QTableWidgetItem)
     def on_tableWidget_itemChanged(self, item):
         self.dico[self.dir][self.tableWidget.verticalHeaderItem(item.row()).data(0)] = item.data(0)
         
     @QtCore.pyqtSlot()
     def on_saveButton_clicked(self):
         if self.dir == None:
-            QtGui.QMessageBox.information(self, "Erreur", "Sélectionner un dossier avant de sauvegarder")
+            QtWidgets.QMessageBox.information(self, "Erreur", "Sélectionner un dossier avant de sauvegarder")
         else:
             os.chdir(self.rootdir + "/" + self.dir)
             with open('dictionary.json', mode='w', encoding='utf-8') as f:
                 json.dump(self.dico[self.dir], f, indent=2)
-            QtGui.QMessageBox.information(self, "Sauvegarde", "Dictionnaire du dossier " + self.dir + " sauvegardé avec succès")
+            QtWidgets.QMessageBox.information(self, "Sauvegarde", "Dictionnaire du dossier " + self.dir + " sauvegardé avec succès")
 
     @QtCore.pyqtSlot()
     def on_buildButton_clicked(self):
         if self.dir == None:
-            QtGui.QMessageBox.information(self, "Erreur", "Sélectionner un dossier avant de construire un récapitulatif")
+            QtWidgets.QMessageBox.information(self, "Erreur", "Sélectionner un dossier avant de construire un récapitulatif")
         elif "" in self.dico[self.dir].values():
-            QtGui.QMessageBox.information(self, "Erreur", "Définir toutes les abréviations avant de construire un récapitulatif")
+            QtWidgets.QMessageBox.information(self, "Erreur", "Définir toutes les abréviations avant de construire un récapitulatif")
         else:
             self.saveButton.click()
             recapdir = self.rootdir + "/" + self.dir + "/Recapitulatif"
@@ -147,13 +147,13 @@ class Recap(form_class, base_class):
                     
                 f.write("\n\\end{document}")
 
-            QtGui.QMessageBox.information(self, "Récapitulatif", "Récapitulatif du dossier " + self.dir + " sauvegardé avec succès dans le fichier " + recapfile)
+            QtWidgets.QMessageBox.information(self, "Récapitulatif", "Récapitulatif du dossier " + self.dir + " sauvegardé avec succès dans le fichier " + recapfile)
             os.chdir(recapdir)
             subprocess.Popen(["C:/Program Files/TeXnicCenter/TeXnicCenter.exe", recapfile])
             
 if __name__ == '__main__':
     locale.setlocale(locale.LC_ALL, '')
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     myrecap = Recap()
     myrecap.show()
     sys.exit(app.exec_())
