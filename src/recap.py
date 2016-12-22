@@ -22,7 +22,7 @@ class Recap(form_class, base_class):
     def __init__(self, parent=None):
         super(Recap, self).__init__(parent)
         self.setupUi(self)
-        self.rootdir = "F:/Documents/ExercicesPrepaSupSpe"
+        self.rootdir = "E:/Documents/ExercicesPrepaSupSpe"
         self.authors = ["BE", "LG", "LK", "OM"]
         os.chdir(self.rootdir)
         listDirModel = QtCore.QStringListModel()
@@ -136,7 +136,8 @@ class Recap(form_class, base_class):
                 for file in problems:
                     with open(file, mode='r', encoding='utf-8') as ff:
                         f.write(
-                            "\\Chapitre{" + re.match('(\\\\begin\s*\\{\s*pb\s*\\}\s*\\{\s*)(.*)(\s*\\})', ff.read(None)).group(
+                            "\\Chapitre{" + re.match('(\\\\begin\s*\\{\s*pb\s*\\}\s*\\{\s*)(.*)(\s*\\})',
+                                                     ff.read(None)).group(
                                 2) + "}\n")
                     ind = file.find(".tex")
                     f.write("\lireEnonces." + file[:ind - 1] + "(" + file[ind - 1] + ")\n")
@@ -159,7 +160,18 @@ class Recap(form_class, base_class):
             QtWidgets.QMessageBox.information(self, "Récapitulatif",
                                               "Récapitulatif du dossier " + self.dir + " sauvegardé avec succès dans le fichier " + recapfile)
             os.chdir(recapdir)
-            subprocess.Popen(["C:/Program Files/TeXnicCenter/TeXnicCenter.exe", recapfile])
+            # subprocess.Popen(["C:/Program Files/TeXnicCenter/TeXnicCenter.exe", recapfile])
+            cmd = 'pdflatex ' + recapfile + ' && '
+            cmd += cmd
+            # cmd = 'latex ' + recapfile + ' && '
+            # cmd += cmd
+            # cmd += 'dvips ' + os.path.splitext(recapfile)[0] + '.dvi && '
+            # cmd += 'ps2pdf ' + os.path.splitext(recapfile)[0] + '.ps &&'
+            # cmd += 'ps2pdf ' + os.path.splitext(recapfile)[0] + '.ps &&'
+            cmd += '"C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe" ' + \
+                   os.path.splitext(recapfile)[
+                       0] + ".pdf"
+            subprocess.Popen(cmd, shell=True)
 
 
 if __name__ == '__main__':
