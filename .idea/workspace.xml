@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be058ad9-5cd2-4682-87a6-8d7093611d1c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/LatexUtils.iml" afterPath="$PROJECT_DIR$/.idea/LatexUtils.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/recap.py" afterPath="$PROJECT_DIR$/src/recap.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/recapgui.ui" afterPath="$PROJECT_DIR$/src/recapgui.ui" />
     </list>
     <ignored path="LatexUtils.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -322,6 +318,14 @@
       <option name="presentableId" value="Default" />
       <updated>1425193818458</updated>
     </task>
+    <task id="LOCAL-00001" summary="Avant edit">
+      <created>1510675308995</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1510675308995</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -359,6 +363,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Avant edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avant edit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
