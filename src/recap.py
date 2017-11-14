@@ -160,14 +160,8 @@ class Recap(form_class, base_class):
             QtWidgets.QMessageBox.information(self, "Récapitulatif",
                                               "Récapitulatif du dossier " + self.dir + " sauvegardé avec succès dans le fichier " + recapfile)
             os.chdir(recapdir)
-            # subprocess.Popen(["C:/Program Files/TeXnicCenter/TeXnicCenter.exe", recapfile])
-            cmd = 'pdflatex ' + recapfile + ' && '
+            cmd = 'xelatex ' + recapfile + ' && '
             cmd += cmd
-            # cmd = 'latex ' + recapfile + ' && '
-            # cmd += cmd
-            # cmd += 'dvips ' + os.path.splitext(recapfile)[0] + '.dvi && '
-            # cmd += 'ps2pdf ' + os.path.splitext(recapfile)[0] + '.ps &&'
-            # cmd += 'ps2pdf ' + os.path.splitext(recapfile)[0] + '.ps &&'
             cmd += '"C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe" ' + \
                    os.path.splitext(recapfile)[
                        0] + ".pdf"

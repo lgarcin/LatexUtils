@@ -34,10 +34,23 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="buttons" stretch="0,0">
+   <layout class="QHBoxLayout" name="buttons" stretch="0,0,0">
     <property name="spacing">
      <number>0</number>
     </property>
+    <item>
+     <widget class="QPushButton" name="editButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Edit Recap</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QPushButton" name="saveButton">
       <property name="sizePolicy">
@@ -110,9 +123,6 @@
     </attribute>
    </widget>
   </widget>
-  <zorder>horizontalGroupBox_2</zorder>
-  <zorder>splitter</zorder>
-  <zorder>saveButton</zorder>
  </widget>
  <resources/>
  <connections/>
