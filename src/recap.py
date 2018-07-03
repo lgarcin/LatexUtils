@@ -20,6 +20,7 @@ form_class, base_class = uic.loadUiType(scriptdir + '/recapgui.ui')
 
 class Recap(form_class, base_class):
     def __init__(self, parent=None):
+        locale.setlocale(locale.LC_ALL, "fra")
         super(Recap, self).__init__(parent)
         self.setupUi(self)
         self.rootdir = "E:/Documents/ExercicesPrepaSupSpe"
@@ -82,15 +83,14 @@ class Recap(form_class, base_class):
                                               "Dictionnaire du dossier " + self.dir + " sauvegardé avec succès")
 
     @QtCore.pyqtSlot()
-    def on_buildButton_clicked(self):
+    def on_writeButton_clicked(self):
         if self.dir == None:
             QtWidgets.QMessageBox.information(self, "Erreur",
-                                              "Sélectionner un dossier avant de construire un récapitulatif")
+                                              "Sélectionner un dossier avant d'écrire un récapitulatif")
         elif "" in self.dico[self.dir].values():
             QtWidgets.QMessageBox.information(self, "Erreur",
-                                              "Définir toutes les abréviations avant de construire un récapitulatif")
+                                              "Définir toutes les abréviations avant d'écrire un récapitulatif")
         else:
-            self.saveButton.click()
             recapdir = self.rootdir + "/" + self.dir + "/Recapitulatif"
             if not os.access(recapdir, os.F_OK):
                 os.mkdir(recapdir)
@@ -159,12 +159,43 @@ class Recap(form_class, base_class):
 
             QtWidgets.QMessageBox.information(self, "Récapitulatif",
                                               "Récapitulatif du dossier " + self.dir + " sauvegardé avec succès dans le fichier " + recapfile)
+
+    @QtCore.pyqtSlot()
+    def on_buildButton_clicked(self):
+        if self.dir == None:
+            QtWidgets.QMessageBox.information(self, "Erreur",
+                                              "Sélectionner un dossier avant de construire un récapitulatif")
+        elif "" in self.dico[self.dir].values():
+            QtWidgets.QMessageBox.information(self, "Erreur",
+                                              "Définir toutes les abréviations avant de construire un récapitulatif")
+        else:
+            recapdir = self.rootdir + "/" + self.dir + "/Recapitulatif"
+            recapfile = "Recap" + self.dir + ".tex"
+            self.saveButton.click()
+            self.writeButton.click()
             os.chdir(recapdir)
             cmd = 'xelatex ' + recapfile + ' && '
             cmd += cmd
             cmd += '"C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe" ' + \
                    os.path.splitext(recapfile)[
                        0] + ".pdf"
+            subprocess.Popen(cmd, shell=True)
+
+    @QtCore.pyqtSlot()
+    def on_editButton_clicked(self):
+        if self.dir == None:
+            QtWidgets.QMessageBox.information(self, "Erreur",
+                                              "Sélectionner un dossier avant d'éditer un récapitulatif")
+        elif "" in self.dico[self.dir].values():
+            QtWidgets.QMessageBox.information(self, "Erreur",
+                                              "Définir toutes les abréviations avant d'éditer un récapitulatif")
+        else:
+            recapdir = self.rootdir + "/" + self.dir + "/Recapitulatif"
+            recapfile = "Recap" + self.dir + ".tex"
+            self.saveButton.click()
+            self.writeButton.click()
+            os.chdir(recapdir)
+            cmd = '"C:/Program Files (x86)/TeXstudio/texstudio.exe" ' + recapfile
             subprocess.Popen(cmd, shell=True)
 
 
